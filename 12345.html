@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flipkart UI Clone</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
+
+body{
+    background:#f1f3f6;
+}
+
+/* ---------- HEADER ---------- */
+
+header{
+    background:#2874f0;
+    padding:10px 24px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    color:white;
+    font-size:22px;
+    font-weight:700;
+}
+
+.search-box{
+    flex:1;
+}
+
+.search-box input{
+    width:100%;
+    padding:10px 14px;
+    border:none;
+    border-radius:2px;
+    outline:none;
+}
+
+.right-menu{
+    display:flex;
+    gap:22px;
+    color:white;
+    font-weight:500;
+}
+
+/* ---------- CATEGORY BAR ---------- */
+
+.categories{
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    padding:12px 0;
+    box-shadow:0 2px 4px rgba(0,0,0,0.08);
+}
+
+.category{
+    position:relative;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:500;
+}
+
+.category:hover{
+    color:#2874f0;
+}
+
+.dropdown{
+    position:absolute;
+    top:26px;
+    left:0;
+    background:white;
+    min-width:150px;
+    padding:10px 12px;
+    box-shadow:0 6px 16px rgba(0,0,0,0.15);
+    display:none;
+    z-index:20;
+}
+
+.category:hover .dropdown{
+    display:block;
+}
+
+.dropdown p{
+    padding:6px 0;
+    font-size:13px;
+}
+
+/* ---------- DYNAMIC SLIDER ---------- */
+
+.slider{
+    margin:14px;
+    height:230px;
+    border-radius:8px;
+    overflow:hidden;
+    position:relative;
+    background:#ddd;
+}
+
+.slide{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:40px 60px;
+    color:white;
+    opacity:0;
+    transition:0.7s;
+}
+
+.slide.active{
+    opacity:1;
+}
+
+.slide h2{
+    font-size:34px;
+}
+
+.slide p{
+    margin-top:6px;
+    font-size:18px;
+    opacity:0.9;
+}
+
+.slide img{
+    height:180px;
+}
+
+/* ---------- PRODUCTS SECTION ---------- */
+
+.section{
+    padding:10px 14px 30px;
+}
+
+.section h2{
+    margin:10px 6px 16px;
+}
+
+.products{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+}
+
+/* ---------- PRODUCT CARD ---------- */
+
+.card{
+    width:230px;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 20px rgba(0,0,0,.12);
+}
+
+.card-img{
+    height:190px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f8f8f8;
+}
+
+.card-img img{
+    max-height:160px;
+}
+
+.card-body{
+    padding:12px 12px 14px;
+}
+
+.card-body h4{
+    font-size:15px;
+    font-weight:600;
+}
+
+.card-body .price{
+    margin-top:4px;
+    color:#212121;
+    font-weight:700;
+}
+
+.card-body .offer{
+    font-size:13px;
+    color:green;
+}
+
+.card-body button{
+    margin-top:10px;
+    width:100%;
+    padding:8px 0;
+    border:none;
+    background:#ff9f00;
+    color:white;
+    border-radius:6px;
+    font-weight:600;
+}
+
+/* ---------- FLOATING CART ---------- */
+
+.cart-box{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    background:#2874f0;
+    color:white;
+    padding:12px 18px;
+    border-radius:30px;
+    font-weight:600;
+}
+
+/* ---------- MODAL ---------- */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-box{
+    background:white;
+    padding:22px 26px;
+    border-radius:10px;
+    width:300px;
+    text-align:center;
+}
+
+.modal-box button{
+    margin-top:12px;
+    padding:7px 14px;
+    background:#2874f0;
+    color:white;
+    border:none;
+    border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Flipkart</div>
+
+    <div class="search-box">
+        <input id="search" type="text" placeholder="Search for products, brands and more">
+    </div>
+
+    <div class="right-menu">
+        <div>Login</div>
+        <div>Seller</div>
+        <div>More</div>
+        <div>Cart</div>
+    </div>
+</header>
+
+<div class="categories">
+    <div class="category">Electronics
+        <div class="dropdown">
+            <p>Mobiles</p>
+            <p>Laptops</p>
+            <p>Audio</p>
+        </div>
+    </div>
+    <div class="category">Fashion
+        <div class="dropdown">
+            <p>Men</p>
+            <p>Women</p>
+            <p>Kids</p>
+        </div>
+    </div>
+    <div class="category">Home
+        <div class="dropdown">
+            <p>Furniture</p>
+            <p>Decor</p>
+        </div>
+    </div>
+    <div class="category">Appliances
+        <div class="dropdown">
+            <p>TV</p>
+            <p>Kitchen</p>
+        </div>
+    </div>
+</div>
+
+<!-- Dynamic banner slider -->
+<div class="slider" id="slider">
+
+    <div class="slide active" style="background:linear-gradient(120deg,#2874f0,#6aa2ff)">
+        <div>
+            <h2>Smartphones Sale</h2>
+            <p>Top brands – Big festive discounts</p>
+        </div>
+        <img src="https://m.media-amazon.com/images/I/71d7rfSl0wL._AC_UY218_.jpg">
+    </div>
+
+    <div class="slide" style="background:linear-gradient(120deg,#0f9d58,#59d18f)">
+        <div>
+            <h2>Work & Study Laptops</h2>
+            <p>Thin. Fast. Powerful.</p>
+        </div>
+        <img src="https://m.media-amazon.com/images/I/71WuDXpTAlL._AC_UY218_.jpg">
+    </div>
+
+    <div class="slide" style="background:linear-gradient(120deg,#ff512f,#f09819)">
+        <div>
+            <h2>Headphones & Audio</h2>
+            <p>Feel the bass this season</p>
+        </div>
+        <img src="https://m.media-amazon.com/images/I/61u1VALn6JL._AC_UY218_.jpg">
+    </div>
+
+</div>
+
+<div class="section">
+    <h2>Best Deals for You</h2>
+
+    <div class="products" id="productList"></div>
+</div>
+
+<div class="cart-box">
+    Cart : <span id="cartCount">0</span>
+</div>
+
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <h3 id="modalTitle"></h3>
+        <p>Added to cart</p>
+        <button onclick="closeModal()">OK</button>
+    </div>
+</div>
+
+<script>
+/* ---------- Slider ---------- */
+
+const slides = document.querySelectorAll(".slide");
+let slideIndex = 0;
+
+setInterval(()=>{
+    slides[slideIndex].classList.remove("active");
+    slideIndex = (slideIndex + 1) % slides.length;
+    slides[slideIndex].classList.add("active");
+},3000);
+
+
+/* ---------- Products ---------- */
+
+const products = [
+ {name:"iPhone 15", price:"₹79,999", offer:"10% off", img:"https://m.media-amazon.com/images/I/71d7rfSl0wL._AC_UY218_.jpg"},
+ {name:"Samsung Galaxy S24", price:"₹74,999", offer:"Exchange offer", img:"https://m.media-amazon.com/images/I/71lD7eGdW-L._AC_UY218_.jpg"},
+ {name:"Asus Vivobook Laptop", price:"₹59,999", offer:"No cost EMI", img:"https://m.media-amazon.com/images/I/71WuDXpTAlL._AC_UY218_.jpg"},
+ {name:"boAt Headphones", price:"₹1,999", offer:"Limited deal", img:"https://m.media-amazon.com/images/I/61u1VALn6JL._AC_UY218_.jpg"},
+ {name:"Smart Watch", price:"₹3,499", offer:"Best seller", img:"watch.png"},
+ {name:"Bluetooth Speaker", price:"₹2,499", offer:"Top rated", img:"https://m.media-amazon.com/images/I/71YlH-4MUQL._AC_UY218_.jpg"},
+ {name:"Gaming Mouse", price:"₹999", offer:"Hot deal", img:"https://m.media-amazon.com/images/I/61mpMH5TzkL._AC_UY218_.jpg"},
+ {name:"Mechanical Keyboard", price:"₹1,499", offer:"New arrival", img:"keyboardmech.jpg"}
+];
+
+let cart=0;
+const productList=document.getElementById("productList");
+
+function render(list){
+    productList.innerHTML="";
+    list.forEach(p=>{
+        const card=document.createElement("div");
+        card.className="card";
+
+        card.innerHTML=`
+            <div class="card-img">
+                <img src="${p.img}">
+            </div>
+            <div class="card-body">
+                <h4>${p.name}</h4>
+                <div class="price">${p.price}</div>
+                <div class="offer">${p.offer}</div>
+                <button>Add to Cart</button>
+            </div>
+        `;
+
+        card.querySelector("button").onclick=(e)=>{
+            e.stopPropagation();
+            addToCart(p.name);
+        };
+
+        productList.appendChild(card);
+    });
+}
+
+function addToCart(name){
+    cart++;
+    document.getElementById("cartCount").innerText=cart;
+    document.getElementById("modalTitle").innerText=name;
+    document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+    document.getElementById("modal").style.display="none";
+}
+
+document.getElementById("search").addEventListener("input",function(){
+    const v=this.value.toLowerCase();
+    render(products.filter(p=>p.name.toLowerCase().includes(v)));
+});
+
+render(products);
+</script>
+
+</body>
+</html>
