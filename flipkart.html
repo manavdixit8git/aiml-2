@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flipkart Clone – CSS only</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
+
+body{
+  background:#f1f3f6;
+}
+
+/* ---------------- HEADER ---------------- */
+
+header{
+  background:#2874f0;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:10px 24px;
+}
+
+.logo{
+  color:#fff;
+  font-weight:700;
+  font-size:22px;
+}
+
+.search{
+  flex:1;
+}
+
+.search input{
+  width:100%;
+  padding:10px 14px;
+  border:none;
+  border-radius:2px;
+  outline:none;
+}
+
+.menu{
+  display:flex;
+  gap:22px;
+  color:#fff;
+  font-weight:500;
+}
+
+/* ---------------- CATEGORY BAR ---------------- */
+
+.categories{
+  background:#fff;
+  display:flex;
+  justify-content:center;
+  gap:60px;
+  padding:12px 0;
+  box-shadow:0 2px 4px rgba(0,0,0,.08);
+}
+
+.category{
+  position:relative;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.category:hover{
+  color:#2874f0;
+}
+
+.dropdown{
+  position:absolute;
+  top:28px;
+  left:0;
+  background:#fff;
+  padding:10px 14px;
+  min-width:160px;
+  display:none;
+  box-shadow:0 10px 20px rgba(0,0,0,.15);
+  z-index:20;
+}
+
+.category:hover .dropdown{
+  display:block;
+}
+
+.dropdown p{
+  font-size:13px;
+  padding:6px 0;
+}
+
+/* ---------------- SLIDER ---------------- */
+
+.hero{
+  max-width:1200px;
+  margin:16px auto 0;
+  overflow:hidden;
+  border-radius:8px;
+  background:#ccc;
+}
+
+.track{
+  display:flex;
+  width:300%;
+  animation:slide 12s infinite;
+}
+
+.slide{
+  width:100%;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:40px 50px;
+  color:white;
+}
+
+.slide h2{
+  font-size:32px;
+  margin-bottom:6px;
+}
+
+.slide p{
+  font-size:17px;
+  opacity:.9;
+}
+
+.slide img{
+  height:180px;
+}
+
+.s1{background:linear-gradient(110deg,#2874f0,#6aa2ff);}
+.s2{background:linear-gradient(110deg,#0f9d58,#6fd7a5);}
+.s3{background:linear-gradient(110deg,#ff512f,#f09819);}
+
+@keyframes slide{
+  0%,25%{transform:translateX(0);}
+  33%,58%{transform:translateX(-100%);}
+  66%,92%{transform:translateX(-200%);}
+  100%{transform:translateX(0);}
+}
+
+/* ---------------- MAIN CONTAINER ---------------- */
+
+.container{
+  max-width:1200px;
+  margin:22px auto;
+  background:#fff;
+  padding:16px 16px 24px;
+  border-radius:6px;
+}
+
+/* ---------------- PRODUCTS GRID ---------------- */
+
+.products{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+}
+
+/* ---------------- PRODUCT CARD ---------------- */
+
+.card{
+  width:210px;
+  border-radius:6px;
+  overflow:hidden;
+  background:#fff;
+  cursor:pointer;
+  border:1px solid #eee;
+  transition:.25s;
+}
+
+.card:hover{
+  box-shadow:0 10px 18px rgba(0,0,0,.12);
+  transform:translateY(-4px);
+}
+
+.card-img{
+  height:170px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#fafafa;
+}
+
+.card-img img{
+  max-height:145px;
+}
+
+.card-info{
+  padding:12px;
+}
+
+.card-info h4{
+  font-size:14px;
+  font-weight:600;
+  color:#212121;
+  line-height:1.3;
+  height:36px;
+  overflow:hidden;
+}
+
+.price{
+  margin-top:6px;
+  font-weight:700;
+  font-size:15px;
+}
+
+.offer{
+  font-size:12px;
+  color:green;
+}
+
+.fake-btn{
+  margin-top:10px;
+  background:#ff9f00;
+  color:#fff;
+  text-align:center;
+  padding:7px 0;
+  border-radius:4px;
+  font-size:13px;
+  font-weight:600;
+}
+
+/* ---------------- FLOAT CART ---------------- */
+
+.cart{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  background:#2874f0;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:24px;
+  font-weight:600;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Flipkart</div>
+
+  <div class="search">
+    <input type="text" placeholder="Search for products, brands and more">
+  </div>
+
+  <div class="menu">
+    <div>Login</div>
+    <div>Seller</div>
+    <div>More</div>
+    <div>Cart</div>
+  </div>
+</header>
+
+<div class="categories">
+  <div class="category">Electronics
+    <div class="dropdown">
+      <p>Mobiles</p>
+      <p>Laptops</p>
+      <p>Audio</p>
+    </div>
+  </div>
+
+  <div class="category">Fashion
+    <div class="dropdown">
+      <p>Men</p>
+      <p>Women</p>
+      <p>Kids</p>
+    </div>
+  </div>
+
+  <div class="category">Home
+    <div class="dropdown">
+      <p>Furniture</p>
+      <p>Decor</p>
+    </div>
+  </div>
+
+  <div class="category">Appliances
+    <div class="dropdown">
+      <p>TV</p>
+      <p>Kitchen</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slider below search bar -->
+<div class="hero">
+  <div class="track">
+
+    <div class="slide s1">
+      <div>
+        <h2>Smartphones Sale</h2>
+        <p>Best brands. Best prices.</p>
+      </div>
+      <img src="https://m.media-amazon.com/images/I/71d7rfSl0wL._AC_UY218_.jpg">
+    </div>
+
+    <div class="slide s2">
+      <div>
+        <h2>Laptops for Work & Study</h2>
+        <p>Thin and powerful devices</p>
+      </div>
+      <img src="https://m.media-amazon.com/images/I/71WuDXpTAlL._AC_UY218_.jpg">
+    </div>
+
+    <div class="slide s3">
+      <div>
+        <h2>Headphones & Speakers</h2>
+        <p>Immersive sound experience</p>
+      </div>
+      <img src="https://m.media-amazon.com/images/I/61u1VALn6JL._AC_UY218_.jpg">
+    </div>
+
+  </div>
+</div>
+
+<!-- Products -->
+<div class="container">
+
+  <h3 style="margin-bottom:14px;">Best Deals for You</h3>
+
+  <div class="products">
+
+    <!-- Card 1 -->
+    <div class="card">
+      <div class="card-img">
+        <img src="https://m.media-amazon.com/images/I/71d7rfSl0wL._AC_UY218_.jpg">
+      </div>
+      <div class="card-info">
+        <h4>Apple iPhone 15</h4>
+        <div class="price">₹79,999</div>
+        <div class="offer">10% off</div>
+        <div class="fake-btn">Add to cart</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img">
+        <img src="https://m.media-amazon.com/images/I/71lD7eGdW-L._AC_UY218_.jpg">
+      </div>
+      <div class="card-info">
+        <h4>Samsung Galaxy S24</h4>
+        <div class="price">₹74,999</div>
+        <div class="offer">Exchange offer</div>
+        <div class="fake-btn">Add to cart</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img">
+        <img src="https://m.media-amazon.com/images/I/71WuDXpTAlL._AC_UY218_.jpg">
+      </div>
+      <div class="card-info">
+        <h4>Asus Vivobook Laptop</h4>
+        <div class="price">₹59,999</div>
+        <div class="offer">No-cost EMI</div>
+        <div class="fake-btn">Add to cart</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img">
+        <img src="https://m.media-amazon.com/images/I/61u1VALn6JL._AC_UY218_.jpg">
+      </div>
+      <div class="card-info">
+        <h4>boAt Headphones</h4>
+        <div class="price">₹1,999</div>
+        <div class="offer">Limited deal</div>
+        <div class="fake-btn">Add to cart</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img">
+        <img src="watch.png">
+      </div>
+      <div class="card-info">
+        <h4>Smart Watch</h4>
+        <div class="price">₹3,499</div>
+        <div class="offer">Best seller</div>
+        <div class="fake-btn">Add to cart</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="cart">Cart : 0</div>
+
+</body>
+</html>
